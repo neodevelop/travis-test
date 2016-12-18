@@ -1,5 +1,8 @@
 language: ruby
 rvm:
-- 2.0.0
-- 1.9.3
-- jruby-19mode
+  - 2.0.0
+  - 1.9.3
+  - jruby-19mode
+notifications:
+  webhooks:
+    - http://requestb.in/10vnt9m1
