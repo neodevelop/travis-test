@@ -1,7 +1,6 @@
-require 'date'
-
 task :default => [:greet]
 
 task :greet do
-  puts "Hello world #{Date.new}!"
+  today = Time.now
+  puts "Hello world! #{today.to_s}"
 end
