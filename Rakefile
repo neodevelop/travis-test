@@ -4,13 +4,17 @@ require 'base64'
 
 task :default => [:all]
 
-task :all => [:greet, :send_mail] do
+task :all => [:greet, :changelog, :send_mail] do
   puts "All is done"
 end
 
 task :greet do
   today = Time.now
   puts "Hello world! #{today.to_s}"
+end
+
+task :changelog do
+  sh "git log --oneline  -n 5 > log_history"
 end
 
 task :send_mail do
@@ -26,7 +30,7 @@ task :send_mail do
     "To" => mail_recipients,
     "TemplateId"  => template_id,
     "TemplateModel" => {
-      "user_name" => 'John Smith'
+      "changelog" => File.read('log_history').to_s.gsub("\n","<br>")
     },
     "Attachments" => [
       {
