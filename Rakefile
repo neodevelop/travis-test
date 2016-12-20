@@ -30,7 +30,7 @@ task :send_mail do
     "To" => mail_recipients,
     "TemplateId"  => template_id,
     "TemplateModel" => {
-      "changelog" => File.read('log_history').to_s.gsub("\n","<br>")
+      "changelog" => File.read("log_history").to_s.split("\n").map { |s| {message:s} }
     },
     "Attachments" => [
       {
