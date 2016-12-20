@@ -1,7 +1,11 @@
 require 'rest-client'
 require 'json'
 
-task :default => [:greet]
+task :default => [:all]
+
+task :all => [:greet, :send_mail] do
+  puts "All is done"
+end
 
 task :greet do
   today = Time.now
