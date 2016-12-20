@@ -1,5 +1,6 @@
 require 'rest-client'
 require 'json'
+require 'base64'
 
 task :default => [:all]
 
@@ -26,7 +27,14 @@ task :send_mail do
     "TemplateId"  => template_id,
     "TemplateModel" => {
       "user_name" => 'John Smith'
-    }
+    },
+    "Attachments" => [
+      {
+        "Name" => "gem_graph.png",
+        "ContentType" => "application/octet-stream",
+        "Content" => Base64.encode64(File.read("gem_graph.png"))
+      }
+    ]
   }
   url = "https://api.postmarkapp.com/email/withTemplate"
   begin
